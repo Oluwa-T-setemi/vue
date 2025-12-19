@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Introduction to Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ getUppercaseMessage() }}</h1>
+      <p>{{ luckyNumber }}</p>
+      <p>
+        {{ employee.name }} is {{ employee.age }} and her salary is {{
+        employee.salary }}
+      </p>
+      <p>Today's lucky number is {{ luckyNumbers[0] }}</p>
+      <p>{{luckyNumbers[3] % 2 == 0 ? "even number" : "odd number"}}</p>
+      <p>Random number between 1 - 10: {{ getRandomNumber() }}</p>
+    </div>
+  </body>
+  <script>
+    const { createApp, ref } = Vue;
+    createApp({
+      setup() {
+        let luckyNumber = ref(5);
+        const message = "hello world";
+        const luckyNumbers = [1, 3, 2, 4, 5, 7, 6, 8];
+        const employee = {
+          name: "Jane Doe",
+          age: 20,
+          salary: 5000,
+        };
+        function getRandomNumber() {
+          luckyNumber.value = Math.floor(Math.random() * 10) + 1;
+          console.log("Lucky Number is" + " " + luckyNumber.value);
+          return Math.floor(Math.random() * 10) + 1;
+        }
+        function getUppercaseMessage() {
+          return message.toUpperCase();
+        }
+
+        return {
+          luckyNumber,
+          luckyNumbers,
+          employee,
+          getRandomNumber,
+          getUppercaseMessage,
+        };
+      },
+    }).mount("#app");
+  </script>
+</html>
